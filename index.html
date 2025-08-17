@@ -11,6 +11,7 @@
       font-family: "Times New Roman", Times, serif;
       margin: 0;
       padding: 0;
+      min-height: 100vh;
     }
     
     .collage-container {
@@ -75,8 +76,9 @@
     }
     
     .collage-group {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
       gap: 8px;
       background: #f5f5dc;
       border-radius: 15px;
@@ -101,6 +103,7 @@
         0 1px 2px rgba(20, 0, 0, 0.6),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
       border: 2px solid rgba(100, 0, 0, 0.4);
+      cursor: pointer;
     }
     
     .collage-item:hover {
@@ -122,25 +125,7 @@
       display: block;
     }
     
-    .collage-small {
-      width: 160px;
-      height: 160px;
-    }
-    
-    .collage-medium {
-      width: 200px;
-      height: 200px;
-    }
-    
-    .collage-large {
-      width: 250px;
-      height: 250px;
-    }
-    
-    .collage-xl {
-      width: 280px;
-      height: 280px;
-    }
+
     
     /* Modal para ver fotos en tamaño completo */
     .modal {
@@ -187,9 +172,111 @@
     .close:hover {
       color: #ff6b6b;
     }
-    
-    .collage-item {
-      cursor: pointer;
+
+    /* Media queries para responsive design */
+    @media (max-width: 1200px) {
+      .collage-container {
+        gap: 60px;
+        padding: 20px 15px 40px 15px;
+      }
+      
+      .collage-group {
+        width: 500px;
+        height: 500px;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .collage-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 15px 10px 30px 10px;
+      }
+      
+      .center-description {
+        order: -1;
+        max-width: 90%;
+        font-size: 18px;
+        padding: 20px;
+        margin-bottom: 20px;
+        top: 0;
+      }
+      
+      .photo-frame {
+        max-width: 100%;
+        padding: 15px;
+      }
+      
+      .collage-group {
+        width: 400px;
+        height: 400px;
+        padding: 15px;
+        gap: 5px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px !important;
+        margin-top: 20px !important;
+        margin-bottom: 30px !important;
+      }
+      
+      .collage-container {
+        gap: 30px;
+        padding: 10px 5px 20px 5px;
+      }
+      
+      .center-description {
+        font-size: 16px;
+        padding: 15px;
+        line-height: 1.8;
+      }
+      
+      .photo-frame {
+        padding: 10px;
+        border-width: 6px;
+      }
+      
+      .collage-group {
+        width: 300px;
+        height: 300px;
+        padding: 10px;
+        gap: 4px;
+      }
+      
+      .close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
+      }
+      
+      footer {
+        position: relative !important;
+        bottom: auto !important;
+        margin-top: 30px;
+        padding: 15px 0 !important;
+      }
+      
+      footer span {
+        font-size: 16px !important;
+        margin-left: 15px !important;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .collage-group {
+        width: 250px;
+        height: 250px;
+        padding: 8px;
+        gap: 3px;
+      }
+      
+      .center-description {
+        font-size: 14px;
+        padding: 12px;
+      }
     }
   </style>
 </head>
@@ -201,22 +288,22 @@
   <!-- Marco izquierdo - 6 imágenes -->
   <div class="photo-frame">
     <div class="collage-group">
-      <div class="collage-item collage-large" style="position: absolute; top: 25px; left: 25px;">
+      <div class="collage-item collage-large" style="grid-area: 1 / 1 / 3 / 3;">
         <img src="Foto 1.jpg" alt="Foto 1">
       </div>
-      <div class="collage-item collage-medium" style="position: absolute; top: 25px; right: 25px;">
+      <div class="collage-item collage-medium" style="grid-area: 1 / 3 / 2 / 5;">
         <img src="Foto 2.jpg" alt="Foto 2">
       </div>
-      <div class="collage-item collage-small" style="position: absolute; top: 325px; left: 25px;">
+      <div class="collage-item collage-small" style="grid-area: 3 / 1 / 4 / 2;">
         <img src="Foto 3.jpg" alt="Foto 3">
       </div>
-      <div class="collage-item collage-large" style="position: absolute; bottom: 25px; right: 25px;">
+      <div class="collage-item collage-large" style="grid-area: 3 / 3 / 5 / 5;">
         <img src="Foto 4.jpg" alt="Foto 4">
       </div>
-      <div class="collage-item collage-medium" style="position: absolute; top: 240px; left: 240px;">
+      <div class="collage-item collage-medium" style="grid-area: 2 / 3 / 3 / 5;">
         <img src="Foto 5.jpg" alt="Foto 5">
       </div>
-      <div class="collage-item collage-small" style="position: absolute; bottom: 25px; left: 25px;">
+      <div class="collage-item collage-small" style="grid-area: 4 / 1 / 5 / 2;">
         <img src="Foto 6.jpg" alt="Foto 6">
       </div>
     </div>
@@ -230,25 +317,25 @@
   <!-- Marco derecho - 7 imágenes -->
   <div class="photo-frame">
     <div class="collage-group">
-      <div class="collage-item collage-large" style="position: absolute; top: 25px; left: 25px;">
+      <div class="collage-item collage-large" style="grid-area: 1 / 1 / 3 / 3;">
         <img src="Foto 7.jpg" alt="Foto 7">
       </div>
-      <div class="collage-item collage-medium" style="position: absolute; top: 25px; right: 25px;">
+      <div class="collage-item collage-medium" style="grid-area: 1 / 3 / 2 / 5;">
         <img src="Foto 8.jpg" alt="Foto 8">
       </div>
-      <div class="collage-item collage-small" style="position: absolute; top: 295px; left: 25px;">
+      <div class="collage-item collage-small" style="grid-area: 3 / 1 / 4 / 2;">
         <img src="Foto 9.jpg" alt="Foto 9">
       </div>
-      <div class="collage-item collage-large" style="position: absolute; bottom: 25px; right: 25px;">
+      <div class="collage-item collage-large" style="grid-area: 3 / 3 / 5 / 5;">
         <img src="Foto 10.jpg" alt="Foto 10">
       </div>
-      <div class="collage-item collage-medium" style="position: absolute; top: 200px; left: 240px;">
+      <div class="collage-item collage-medium" style="grid-area: 2 / 3 / 3 / 5;">
         <img src="Foto 11.jpg" alt="Foto 11">
       </div>
-      <div class="collage-item collage-small" style="position: absolute; bottom: 25px; left: 25px;">
+      <div class="collage-item collage-small" style="grid-area: 4 / 1 / 5 / 2;">
         <img src="Foto 12.jpg" alt="Foto 12">
       </div>
-      <div class="collage-item collage-small" style="position: absolute; top: 325px; right: 25px;">
+      <div class="collage-item collage-small" style="grid-area: 3 / 5 / 4 / 6;">
         <img src="Foto 13.jpg" alt="Foto 13">
       </div>
     </div>
